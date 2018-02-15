@@ -1,0 +1,133 @@
+﻿@*<a href="~/Views/Home/Index.cshtml">~/Views/Home/Index.cshtml</a>*@
+@model IEnumerable<Basketball_Project.Models.PlayerInfo>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#reveal').click(function () {
+            $('#ShowMe').toggle();
+        })
+
+    });
+
+    //$(document).ready(function () {
+    //    var cookie1 = $.cookie("cookie1");
+       
+    //    !(cookie1 == "changed") || $('#reveal').attr('checked', true);
+    //    $('#reveal').change(function () {
+    //        $('#ShowMe').toggle(!this.checked);
+    //        if (this.checked) {
+    //            $.cookie("cookie1", "changed");
+    //        } else {
+    //            $.cookie("cookie1", null);
+    //        }
+    //    }).change();
+       
+    //}); 
+
+
+</script>
+
+@{
+    ViewBag.Title = "NBA Players";
+
+}
+<div class="background">
+    <div class="container heading-container">
+        <div class="heading introHeading">National Basketball Association (NBA) Database</div>
+    </div>
+
+    <hr />
+
+
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <p class="search" id="keep">
+            Team: @Html.DropDownList("playerTeam", "All")
+            Position: @Html.DropDownList("playerPosition", "All")
+            Name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" class="btn btn-default" />
+            <input type="checkbox" id="reveal" /><span>   Add another search</span>
+
+        </p>
+
+        <div style="display:none" id="ShowMe">
+            <p class="search">
+                Team: @Html.DropDownList("playerTeam2", "All")
+                Position: @Html.DropDownList("playerPosition2", "All")
+                Name: @Html.TextBox("SearchString2")
+            </p>
+        </div>
+    }
+
+    @Html.ActionLink("Add New Player", "Create", null, new { @class = "btn btn-default addPlayerBtn" })
+    <br /><br />
+    <p>**All statistics are per game averages for the 2017-18 NBA season</p>
+
+    <table class="table">
+        <tr class="table-header">
+            <th class="text-center" id="indexTableHead">
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th class="text-center" id="indexTableHead">
+                @Html.DisplayNameFor(model => model.Name)
+
+            <th class="text-center" id="indexTableHead">
+                @Html.DisplayNameFor(model => model.Team)
+            </th>
+            <th class="text-center" id="indexTableHead">
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th class="text-center" id="indexTableHead">
+                @Html.ActionLink("Points", "Index", new { sortOrder = ViewBag.PointsSortParm, playerTeam = Request["playerTeam"], playerTeam2 = Request["playerTeam2"], playerPosition = Request["playerPosition"], playerPosition2 = Request["playerPosition2"], searchString = Request["searchString"], searchString2 = Request["searchString2"] })
+            </th>
+            <th class="text-center tableLinks" id="indexTableHead">
+                @Html.ActionLink("Assists", "Index", new { sortOrder = ViewBag.AssistsSortParm, playerTeam = Request["playerTeam"], playerTeam2 = Request["playerTeam2"], playerPosition = Request["playerPosition"], playerPosition2 = Request["playerPosition2"], searchString = Request["searchString"], searchString2 = Request["searchString2"] })
+            </th>
+            <th class="text-center" id="indexTableHead">
+                @Html.ActionLink("Rebounds", "Index", new { sortOrder = ViewBag.ReboundsSortParm, playerTeam = Request["playerTeam"], playerTeam2 = Request["playerTeam2"], playerPosition = Request["playerPosition"], playerPosition2 = Request["playerPosition2"], searchString = Request["searchString"], searchString2 = Request["searchString2"] })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    <img src="@Url.Content(item.Picture)" height="100" />
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center toUpper">
+                    @Html.DisplayFor(modelItem => item.Team)
+                </td>
+                <td class="text-center toUpper">
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Assists)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Rebounds)
+                </td>
+                <td class="text-center">
+                    <ul class="list-inline">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-success" }) |
+                        @*@Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn btn-danger" }) |*@
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-danger" })
+                    </ul>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

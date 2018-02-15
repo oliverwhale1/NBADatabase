@@ -1,0 +1,86 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: white;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+body {
+    background-color: #292929;
+    color: #bbc8c8;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+@font-face {
+    font-family: "Cabin-BoldItalic";
+    src: url('../fonts/Cabin-BoldItalic.ttf') format('truetype');
+}
+
+.introHeading {
+    font-size: 3em;
+    font-family: "Cabin-BoldItalic", Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: 100;
+    letter-spacing: 1px;
+    text-align: center;
+    background-color: #993213;
+    border-bottom: double #555;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+#indexTableHead {
+    color: #FDBB30;
+}
+
+.text-center {
+    font-family: Verdana, sans-serif;
+    line-height: 26px;
+   color: #bbc8c8;
+    
+}
+
+.addPlayerBtn {
+    margin-left: 87.5%;
+}
+
+.details {
+    margin-left: 87.5%;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.toUpper {
+    text-transform: uppercase;
+}
+
+.modal h1 {
+    color: #FDBB30;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal p {
+    color: black;
+    font-family: Verdana, sans-serif;
+}
